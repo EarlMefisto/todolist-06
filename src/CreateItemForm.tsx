@@ -1,57 +1,59 @@
-import { useState, KeyboardEvent, ChangeEvent } from "react";
-import { Button, TextField, Tooltip } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Button, TextField, Tooltip } from "@mui/material"
+import { ChangeEvent, KeyboardEvent, useState } from "react"
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-export type Props = {
-  createItem: (itemTitle: string) => void;
-};
+
+type Props = {
+    createItem: (itemTitle: string) => void
+}
 
 export const CreateItemForm = ({ createItem }: Props) => {
-  const [taskTitle, setTaskTitle] = useState("");
-  const [error, setError] = useState<string | null>(null);
+    const [itemTitle, setItemTitle] = useState('')
+    const [error, setError] = useState<string | null>(null)
 
-  const changeItemTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setTaskTitle(event.currentTarget.value);
-    setError(null);
-  };
-
-  const createItemOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      createItemHandler();
+    const changeItemTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setItemTitle(event.currentTarget.value)
+        setError(null)
     }
-  };
 
-  const createItemHandler = () => {
-    const trimmedTitle = taskTitle.trim();
-    if (trimmedTitle !== "") {
-      createItem(trimmedTitle);
-      setTaskTitle("");
-    } else {
-      setError("Title is required");
+    const createItemHandler = () => {
+        const trimmedTitle = itemTitle.trim()
+        if (trimmedTitle !== '') {
+            createItem(trimmedTitle)
+            setItemTitle('')
+        } else {
+            setError('Title is required')
+        }
     }
-  };
+    const createTaskOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            createItemHandler()
+        }
+    }
 
-  return (
-    <div>
-      <TextField
-        size="small"
-        variant="outlined"
-        value={createItem}
-        onChange={changeItemTitleHandler}
-        onKeyDown={createItemOnEnterHandler}
-        error={!!error}
-        helperText={error}
-      />
-      <Tooltip title="Add item">
-        <Button
-          disableElevation
-          variant="contained"
-          onClick={createItemHandler}
-          endIcon={<Add />}
-        >
-          add
-        </Button>
-      </Tooltip>
-    </div>
-  );
-};
+    return (
+        <div>
+            <TextField
+                size="small"
+                variant="outlined"
+
+                value={itemTitle}
+                onChange={changeItemTitleHandler}
+                onKeyDown={createTaskOnEnterHandler}
+                error={!!error}
+                helperText={error}
+            />
+            <Tooltip title="Add item">
+                <Button
+                    disableElevation
+                    variant="contained"
+                    onClick={createItemHandler}
+                    endIcon={<AddCircleOutlineIcon />}
+                >
+                    add
+                </Button>
+            </Tooltip>
+            {/* {error && <div className={'error-message'}>{error}</div>} */}
+        </div>
+    )
+}
