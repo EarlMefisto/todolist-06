@@ -1,11 +1,11 @@
-import { SxProps } from '@mui/material'
+import { SxProps } from "@mui/material";
 
 export const containerSx: SxProps = {
-    display: 'flex',
-    justifyContent: 'space-between',
-}
+  display: "flex",
+  justifyContent: "space-between",
+};
 
 export const getListItemSx = (isDone: boolean): SxProps => ({
-    opacity: isDone ? 0.5 : 1,
-    fontWeight: isDone ? 400 : 700
-})
+  opacity: isDone ? 0.5 : 1,
+  fontWeight: isDone ? 400 : 700,
+});
