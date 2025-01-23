@@ -4,7 +4,7 @@ import { FilterValues, Todolist } from "../../App";
 const initialState: Todolist[] = [];
 
 type ActionType =
-  | DeleteTododlistActionType
+  | DeleteTodolistActionType
   | CreateTodolistActionType
   | ChangeTodolistTitleActionType
   | ChangeTodolistFilterActionType;
@@ -41,7 +41,7 @@ export const todolistsReducer = (
 
 export const DeleteTododlistAC = (id: string) =>
   ({ type: "delete_todolist", payload: { id: id } } as const);
-export type DeleteTododlistActionType = ReturnType<typeof DeleteTododlistAC>;
+export type DeleteTodolistActionType = ReturnType<typeof DeleteTododlistAC>;
 
 export const CreateTodolistAC = (title: string) =>
   ({ type: "create_todolist", payload: { title, id: v1() } } as const);
